@@ -24,6 +24,7 @@ class SecondViewController: UIViewController {
             imageView.sizeToFit()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchImage()
@@ -34,7 +35,16 @@ class SecondViewController: UIViewController {
         imageURL = URL(string: "https://images.pexels.com/photos/1485894/pexels-photo-1485894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        guard let url = imageURL, let imageData = try? Data(contentsOf: url) else { return }
-        self.image = UIImage(data: imageData)
+        // создаем очередь
+        let queue = DispatchQueue.global(qos: .utility)
+        // помещаем
+        queue.async {
+            guard let url = self.imageURL, let imageData = try? Data(contentsOf: url) else { return }
+            // работу с интерфейсом помещаем в основной поток
+            DispatchQueue.main.async {
+                self.image = UIImage(data: imageData)
+            }
+        }
+        
     }
 }
