@@ -63,7 +63,7 @@ class SecondViewController: UIViewController {
     }
     
     private func fetchImage() {
-        imageURL = URL(string: "https://images.pexels.com/photos/1485894/pexels-photo-1485894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+        imageURL = URL(string: "https://placepic.ru/wp-content/uploads/2019/07/Majestic-Sow.jpg")
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         // создаем очередь
